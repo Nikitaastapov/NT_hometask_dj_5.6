@@ -2,25 +2,25 @@
 
 @baseUrl = http://localhost:8000/api/v1
 
-# создание продукта
+# создание продукта-done
 POST {{baseUrl}}/products/
 Content-Type: application/json
 
 {
-  "title": "Помидор",
-  "description": "Лучшие помидоры на рынке"
+  "title": "Морковь",
+  "description": "Морковь мытая"
 }
 
 ###
 
-# получение продуктов
+# получение продуктов - done
 GET {{baseUrl}}/products/
 Content-Type: application/json
 
 ###
 
-# обновление продукта
-PATCH {{baseUrl}}/products/1/
+# обновление продукта - done
+PATCH {{baseUrl}}/products/8/
 Content-Type: application/json
 
 {
@@ -29,33 +29,46 @@ Content-Type: application/json
 
 ###
 
-# удаление продукта
-DELETE {{baseUrl}}/products/1/
+# удаление продукта - done
+DELETE {{baseUrl}}/products/8/
 Content-Type: application/json
 
 ###
 
-# поиск продуктов по названию и описанию
-GET {{baseUrl}}/products/?search=помидор
+# получение складов - done
+GET {{baseUrl}}/stocks/
 Content-Type: application/json
 
 ###
 
-# создание склада
+
+# поиск продуктов по названию и описанию - done
+GET {{baseUrl}}/products/?search=морковь
+Content-Type: application/json
+
+###
+
+# поиск продуктов по названию и описанию - done
+GET {{baseUrl}}/products/?search=сезон
+Content-Type: application/json
+
+###
+
+# создание склада - done
 POST {{baseUrl}}/stocks/
 Content-Type: application/json
 
 {
-  "address": "мой адрес не дом и не улица, мой адрес сегодня такой: www.ленинград-спб.ru3",
+  "address": "Тула",
   "positions": [
     {
-      "product": 2,
-      "quantity": 250,
-      "price": 120.50
+      "product": 5,
+      "quantity": 50,
+      "price": 50.30
     },
     {
-      "product": 3,
-      "quantity": 100,
+      "product": 4,
+      "quantity": 1000,
       "price": 180
     }
   ]
@@ -63,27 +76,27 @@ Content-Type: application/json
 
 ###
 
-# обновляем записи на складе
-PATCH {{baseUrl}}/stocks/4/
+# обновляем записи на складе - done
+PATCH {{baseUrl}}/stocks/5/
 Content-Type: application/json
 
 {
   "positions": [
     {
       "product": 2,
-      "quantity": 100,
-      "price": 130.80
+      "quantity": 999,
+      "price": 10000
     },
     {
       "product": 3,
-      "quantity": 243,
-      "price": 145
+      "quantity": 99,
+      "price": 10000
     }
   ]
 }
 
 ###
 
-# поиск складов, где есть определенный продукт
-GET {{baseUrl}}/stocks/?products=2
+# поиск складов, где есть определенный продукт - done
+GET {{baseUrl}}/stocks/?products=milk
 Content-Type: application/json
