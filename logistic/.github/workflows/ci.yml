@@ -1,0 +1,60 @@
+name: Тестирование и развертываение проекта
+
+on:
+    push:
+        branches: [cicd]
+        
+jobs:
+    tests:
+        runs-on: ubuntu-20.04
+        env:
+            SECRET_KEY: ${{ secrets.SECRET_KEY }}
+            DEBUG: "0"
+            ENGINE:${{ secrets.ENGINE }}
+            NAME: ${{ secrets.NAME }}
+            HOST: ${{ secrets.HOST }}
+            PORT: ${{ secrets.PORT }}
+            USER: ${{ secrets.USER }}
+            PASSWORD: ${{ secrets.PASSWORD }}
+        services:
+            postgres_main:
+                image: postgres:12
+                env: 
+                #берем данные из env выше
+                    POSTGRES_DB: ${{ env.NAME }}
+                    POSTGRES_USER: ${{ env.USER }}
+                    POSTGRES_PASSWORD: ${{ env.PASSWORD }}
+                ports:
+                    -5432:5432
+                options:
+                    --health-cmd pg_isready
+                    --health-interval 5s
+                    --health-timeout 5s
+                    --health-retries 5
+        steps:
+            -name: Проверяем репозиторий на наличие изменений
+            uses: actions/checkout@v3
+            
+            -name: Установка Python и развертываение окружения
+            uses: actions/setup-python@v3
+            with:
+                python-version: 3.9
+                
+            -name: Установка зависимостей
+            run: pip instal -r requirements.txt
+            
+            -name: Линтинг
+            run: flake8 logistic/ --exclude=logistic/migrations/
+            
+            -name: Тесты
+            run: python manage test
+             env:
+                 SECRET_KEY: ${{ env.SECRET_KEY }}
+                 DEBUG: ${{ env.DEBUG }}
+                 ENGINE:${{ env.ENGINE }}
+                 NAME: ${{ env.NAME }}
+                 HOST: ${{ env.HOST }}
+                 PORT: ${{ env.PORT }}
+                 USER: ${{ env.USER }}
+                 PASSWORD: ${{ env.PASSWORD }}
+            
