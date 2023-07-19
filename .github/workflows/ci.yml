@@ -58,3 +58,11 @@ jobs:
                 USER: ${{ env.USER }}
                 PASSWORD: ${{ env.PASSWORD }}
             
+            - name: Развертываение проекта
+              uses: appleboy/ssh-action@master
+              with:
+                  host: '151.248.123.137'
+                  username: 'nikita'
+                  password: 'nikita'
+                  script: expect /home/nikita/NT_hometask_dj_5.6/pull.exp
+            
