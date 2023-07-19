@@ -33,22 +33,22 @@ jobs:
                     --health-retries 5
         steps:
             -name: Проверяем репозиторий на наличие изменений
-            uses: actions/checkout@v3
+             uses: actions/checkout@v3
             
             -name: Установка Python и развертываение окружения
-            uses: actions/setup-python@v3
-            with:
+             uses: actions/setup-python@v3
+             with:
                 python-version: 3.9
                 
             -name: Установка зависимостей
-            run: pip instal -r requirements.txt
+             run: pip instal -r requirements.txt
             
             -name: Линтинг
-            run: flake8 logistic/ --exclude=logistic/migrations/
+             run: flake8 logistic/ --exclude=logistic/migrations/
             
             -name: Тесты
-            run: python manage.py test
-            env:
+             run: python manage.py test
+             env:
                 SECRET_KEY: ${{ env.SECRET_KEY }}
                 DEBUG: ${{ env.DEBUG }}
                 ENGINE: ${{ env.ENGINE }}
