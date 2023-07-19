@@ -1,0 +1,5 @@
+#!/bin/bash/expect
+spawn /home/nikita/NT_hometask_dj_5.6/pull.sh
+expect "password" 
+send -- "123456\r"
+expect  eof
