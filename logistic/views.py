@@ -8,6 +8,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import filters
 
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+
 class CustomSearchFilter(filters.SearchFilter):
     search_param = 'products'
 
@@ -24,6 +28,11 @@ class StockViewSet(ModelViewSet):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
     # при необходимости добавьте параметры фильтрации
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter, CustomSearchFilter]
-    search_fields = ['products__title', 'products__description']  
-    
+    filter_backends = [DjangoFilterBackend, SearchFilter,
+                       OrderingFilter, CustomSearchFilter]
+    search_fields = ['products__title', 'products__description']
+
+
+class TestView(APIView):
+    def get(self, request):
+        return Response('Test operation')

@@ -5,7 +5,7 @@ from django.db import models
 class Product(models.Model):
     title = models.CharField(max_length=60, unique=True)
     description = models.TextField(null=True, blank=True)
-    
+
     def __str__(self):
         return self.title
 
@@ -21,7 +21,8 @@ class Stock(models.Model):
     def __str__(self):
         return self.address
 
-class StockProduct(models.Model):
+
+class StockProduct (models.Model):
     stock = models.ForeignKey(
         Stock,
         on_delete=models.CASCADE,

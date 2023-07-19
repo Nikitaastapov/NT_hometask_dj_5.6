@@ -1,0 +1,8 @@
+/advertisements/__pycache__/,
+/advertisements/migrations/__pycache__/,
+/api_with_restrictions/__pycache__/,
+/api_with_restrictions/.spyproject/,
+*.env
+
+
+
