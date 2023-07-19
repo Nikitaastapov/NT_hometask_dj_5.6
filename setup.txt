@@ -13,7 +13,7 @@ pip install psycopg2-binary
 11) python3 manage.py makemigrations - отправка изменений + python manage.py migrate
 12) подключить фильтры pip install django-filter
 13) тест python3 manage.py test
-
+14) добавить на github env в раздел action
 
 
 10) python3 manage.py shell - спец интерпретатор django
