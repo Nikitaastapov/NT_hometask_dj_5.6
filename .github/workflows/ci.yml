@@ -2,8 +2,7 @@ name: Тестирование и развертываение проекта
 
 on:
     push:
-        branches:
-            -cicd
+        branches: [ cicd ]
         
 jobs:
     tests:
