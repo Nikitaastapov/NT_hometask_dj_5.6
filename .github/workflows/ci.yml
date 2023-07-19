@@ -32,23 +32,23 @@ jobs:
                     --health-timeout 5s
                     --health-retries 5
         steps:
-            -name: Проверяем репозиторий на наличие изменений
-             uses: actions/checkout@v3
+            - name: Проверяем репозиторий на наличие изменений
+              uses: actions/checkout@v3
             
-            -name: Установка Python и развертываение окружения
-             uses: actions/setup-python@v3
-             with:
+            - name: Установка Python и развертываение окружения
+              uses: actions/setup-python@v3
+              with:
                 python-version: 3.9
                 
-            -name: Установка зависимостей
-             run: pip instal -r requirements.txt
+            - name: Установка зависимостей
+              run: pip instal -r requirements.txt
             
-            -name: Линтинг
-             run: flake8 logistic/ --exclude=logistic/migrations/
+            - name: Линтинг
+              run: flake8 logistic/ --exclude=logistic/migrations/
             
-            -name: Тесты
-             run: python manage.py test
-             env:
+            - name: Тесты
+              run: python manage.py test
+              env:
                 SECRET_KEY: ${{ env.SECRET_KEY }}
                 DEBUG: ${{ env.DEBUG }}
                 ENGINE: ${{ env.ENGINE }}
